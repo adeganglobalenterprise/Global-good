@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Global Finance Bank - International Banking, Transfers, Crypto, and Card Services">
+    <meta name="keywords" content="banking, international transfer, crypto, cards, finance, swift, online banking">
+    <title>Global Finance Bank - International Banking & Transfers</title>
+    <link rel="stylesheet" href="style.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🏦 Global Finance Bank</h1>
+            <p>Your Trusted International Banking Partner</p>
+        </header>
+
+        <!-- Login Section -->
+        <div id="login-section" class="login-section">
+            <div class="login-card">
+                <h2>🔐 Admin Login</h2>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="admin-username" placeholder="Enter admin username">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="admin-password" placeholder="Enter admin password">
+                </div>
+                <button class="btn" id="admin-login-btn">Login as Admin</button>
+            </div>
+
+            <div class="login-card">
+                <h2>👤 Customer Login</h2>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="customer-email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="customer-password" placeholder="Enter your password">
+                </div>
+                <button class="btn" id="customer-login-btn">Login</button>
+                <button class="btn btn-secondary" id="register-btn" style="margin-top: 10px;">Register New Account</button>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard -->
+        <div id="admin-dashboard" class="dashboard">
+            <div class="nav-tabs">
+                <button class="active" onclick="UI.switchTab('admin-overview')">Overview</button>
+                <button onclick="UI.switchTab('admin-customers')">Customers</button>
+                <button onclick="UI.switchTab('admin-transactions')">Transactions</button>
+                <button onclick="UI.switchTab('admin-mining')">Mining Wallet</button>
+                <button onclick="UI.switchTab('admin-crypto')">Crypto Wallets</button>
+                <button onclick="UI.switchTab('admin-settings')">Settings</button>
+                <button class="btn-danger" id="admin-logout" style="margin-left: auto;">Logout</button>
+            </div>
+
+            <!-- Admin Overview -->
+            <div id="admin-overview" class="tab-content active">
+                <h2>📊 Dashboard Overview</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Customers</h3>
+                        <div class="value" id="total-customers">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Transactions</h3>
+                        <div class="value" id="total-transactions">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Mining Balance</h3>
+                        <div class="value balance-update" id="mining-balance">£0.00</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Customers -->
+            <div id="admin-customers" class="tab-content">
+                <h2>👥 Customer Management</h2>
+                <div class="customer-list" id="customer-list">
+                    <!-- Customers will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Admin Transactions -->
+            <div id="admin-transactions" class="tab-content">
+                <h2>💳 Transaction History</h2>
+                <table class="transaction-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactions-body">
+                        <!-- Transactions will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Admin Mining -->
+            <div id="admin-mining" class="tab-content">
+                <div class="mining-section">
+                    <h2>⛏️ Crypto Mining Wallet</h2>
+                    <div class="mining-stats">
+                        <div class="mining-stat">
+                            <h3>Current Balance</h3>
+                            <div class="value" id="mining-balance-display">£0.00</div>
+                        </div>
+                        <div class="mining-stat">
+                            <h3>Wallet Address</h3>
+                            <div class="value" id="mining-wallet-display">Not set</div>
+                        </div>
+                        <div class="mining-stat">
+                            <h3>Mining Rate</h3>
+                            <div class="value">£0.50 / 5min</div>
+                        </div>
+                    </div>
+                    <div class="switch-container">
+                        <label class="switch">
+                            <input type="checkbox" id="mining-toggle">
+                            <span class="slider"></span>
+                        </label>
+                        <span style="font-size: 1.2em; font-weight: 600;">Enable Mining</span>
+                    </div>
+                    <div class="wallet-info" style="margin-top: 20px;">
+                        <label>Set Mining Wallet Address:</label>
+                        <div style="display: flex; gap: 10px; margin-top: 10px;">
+                            <input type="text" id="mining-wallet" placeholder="Enter crypto wallet address" style="flex: 1; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px;">
+                            <button class="btn" id="set-wallet-btn" style="width: auto;">Set Wallet</button>
+                        </div>
+                    </div>
+                    
+                    <div class="auto-credit-section" style="margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                        <h3 style="margin-bottom: 15px;">🔄 Auto Credit to Crypto Wallet</h3>
+                        <div class="switch-container" style="margin-bottom: 15px;">
+                            <label class="switch">
+                                <input type="checkbox" id="auto-credit-toggle">
+                                <span class="slider"></span>
+                            </label>
+                            <span style="font-size: 1.1em; font-weight: 600;">Enable Auto Credit</span>
+                        </div>
+                        <div class="form-group">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Select Wallet to Credit:</label>
+                            <select id="credit-wallet-select" style="width: 100%; padding: 12px; border: 2px solid rgba(255,255,255,0.3); border-radius: 8px; background: rgba(255,255,255,0.1); color: white; font-size: 1em;">
+                                <option value="BTC">Bitcoin (BTC)</option>
+                                <option value="ETH">Ethereum (ETH)</option>
+                                <option value="USDT">Tether (USDT)</option>
+                                <option value="USDC">USD Coin (USDC)</option>
+                                <option value="BNB">Binance Coin (BNB)</option>
+                                <option value="DOGE">Dogecoin (DOGE)</option>
+                                <option value="LTC">Litecoin (LTC)</option>
+                                <option value="XRP">Ripple (XRP)</option>
+                                <option value="ADA">Cardano (ADA)</option>
+                                <option value="SOL">Solana (SOL)</option>
+                            </select>
+                        </div>
+                        <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">
+                            When enabled, mining rewards will be automatically credited to the selected crypto wallet instead of the main balance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Crypto Wallets -->
+            <div id="admin-crypto" class="tab-content">
+                <h2>💎 Crypto Wallet Management</h2>
+                <p style="margin-bottom: 20px;">Manage all crypto wallets. Set addresses and monitor balances.</p>
+                <div id="crypto-wallets-container">
+                    <!-- Crypto wallets will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Admin Settings -->
+            <div id="admin-settings" class="tab-content">
+                <h2>⚙️ System Settings</h2>
+                <div class="form-group">
+                    <label>Bank Name</label>
+                    <input type="text" value="Global Finance Bank" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Transfer Fee (Local)</label>
+                    <input type="text" value="2%" readonly>
+                </div>
+                <div class="form-group">
+                    <label>International Transfer Fee</label>
+                    <input type="text" value="5%" readonly>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Dashboard -->
+        <div id="customer-dashboard" class="dashboard">
+            <div class="nav-tabs">
+                <button class="active" onclick="UI.switchTab('customer-overview')">Overview</button>
+                <button onclick="UI.switchTab('customer-transfer')">Transfer</button>
+                <button onclick="UI.switchTab('customer-deposit')">Deposit</button>
+                <button onclick="UI.switchTab('customer-cards')">Cards</button>
+                <button onclick="UI.switchTab('customer-bills')">Pay Bills</button>
+                <button onclick="UI.switchTab('customer-history')">History</button>
+                <button class="btn-danger" id="customer-logout" style="margin-left: auto;">Logout</button>
+            </div>
+
+            <!-- Customer Overview -->
+            <div id="customer-overview" class="tab-content active">
+                <h2>👋 Welcome!</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Account Balance</h3>
+                        <div class="value" id="customer-balance">£0.00</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Account Number</h3>
+                        <div class="value" id="customer-account">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Credit Limit</h3>
+                        <div class="value">£5,000.00</div>
+                    </div>
+                </div>
+                <div style="margin-top: 30px;">
+                    <h3>Quick Actions</h3>
+                    <div class="action-grid" style="margin-top: 20px;">
+                        <div class="action-card" onclick="UI.showModal('local-transfer-modal')">
+                            <div class="icon">🏠</div>
+                            <h4>Local Transfer</h4>
+                        </div>
+                        <div class="action-card" onclick="UI.showModal('international-transfer-modal')">
+                            <div class="icon">🌍</div>
+                            <h4>International</h4>
+                        </div>
+                        <div class="action-card" onclick="UI.showModal('cash-deposit-modal')">
+                            <div class="icon">💵</div>
+                            <h4>Cash Deposit</h4>
+                        </div>
+                        <div class="action-card" onclick="UI.showModal('card-deposit-modal')">
+                            <div class="icon">💳</div>
+                            <h4>Card Deposit</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Transfer -->
+            <div id="customer-transfer" class="tab-content">
+                <h2>💸 Transfer Money</h2>
+                <div class="action-grid">
+                    <div class="action-card" onclick="UI.showModal('local-transfer-modal')">
+                        <div class="icon">🏠</div>
+                        <h4>Local Transfer</h4>
+                        <p>Transfer to local accounts</p>
+                    </div>
+                    <div class="action-card" onclick="UI.showModal('international-transfer-modal')">
+                        <div class="icon">🌍</div>
+                        <h4>International</h4>
+                        <p>SWIFT transfers worldwide</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Deposit -->
+            <div id="customer-deposit" class="tab-content">
+                <h2>💰 Deposit Money</h2>
+                <div class="action-grid">
+                    <div class="action-card" onclick="UI.showModal('cash-deposit-modal')">
+                        <div class="icon">💵</div>
+                        <h4>Cash Deposit</h4>
+                        <p>Deposit cash at any branch</p>
+                    </div>
+                    <div class="action-card" onclick="UI.showModal('card-deposit-modal')">
+                        <div class="icon">💳</div>
+                        <h4>Card Deposit</h4>
+                        <p>Deposit using debit/credit card</p>
+                    </div>
+                    <div class="action-card" onclick="UI.showModal('gift-card-modal')">
+                        <div class="icon">🎁</div>
+                        <h4>Gift Card</h4>
+                        <p>Redeem gift cards</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Cards -->
+            <div id="customer-cards" class="tab-content">
+                <h2>💳 My Cards</h2>
+                <div class="form-group" style="max-width: 300px;">
+                    <label>Card Type</label>
+                    <select id="card-type" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px;">
+                        <option value="debit">Debit Card</option>
+                        <option value="credit">Credit Card</option>
+                    </select>
+                </div>
+                <button class="btn btn-success" id="issue-card-btn" style="max-width: 300px; margin-top: 20px;">Issue New Card</button>
+                <div id="customer-cards" style="margin-top: 30px;">
+                    <!-- Cards will be displayed here -->
+                </div>
+            </div>
+
+            <!-- Customer Bills -->
+            <div id="customer-bills" class="tab-content">
+                <h2>📄 Pay Bills</h2>
+                <div class="action-card" onclick="UI.showModal('bill-payment-modal')" style="max-width: 300px; margin-bottom: 20px;">
+                    <div class="icon">📝</div>
+                    <h4>Pay Bills</h4>
+                    <p>Pay utilities and services</p>
+                </div>
+            </div>
+
+            <!-- Customer History -->
+            <div id="customer-history" class="tab-content">
+                <h2>📜 Transaction History</h2>
+                <table class="transaction-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="customer-transactions-body">
+                        <!-- Transactions will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>📝 Register New Account</h2>
+            <div class="form-group">
+                <label>First Name</label>
+                <input type="text" id="reg-first-name" placeholder="Enter first name">
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" id="reg-last-name" placeholder="Enter last name">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="reg-email" placeholder="Enter email address">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="reg-password" placeholder="Create password">
+            </div>
+            <div class="form-group">
+                <label>Passport Number</label>
+                <input type="text" id="reg-passport" placeholder="Enter passport number">
+            </div>
+            <button class="btn btn-success" id="customer-register-btn">Register</button>
+        </div>
+    </div>
+
+    <!-- Local Transfer Modal -->
+    <div id="local-transfer-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>🏠 Local Transfer</h2>
+            <div class="form-group">
+                <label>Recipient Account Number (10 digits)</label>
+                <input type="text" id="local-recipient" placeholder="Enter account number">
+            </div>
+            <div class="form-group">
+                <label>Amount (£)</label>
+                <input type="number" id="local-amount" placeholder="Enter amount">
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text" id="local-description" placeholder="Enter description">
+            </div>
+            <p style="color: #666; margin-bottom: 15px;">Fee: 2% of transfer amount</p>
+            <button class="btn btn-success" id="local-transfer-submit">Transfer</button>
+        </div>
+    </div>
+
+    <!-- International Transfer Modal -->
+    <div id="international-transfer-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>🌍 International Transfer (SWIFT)</h2>
+            <div class="form-group">
+                <label>Recipient Account/IBAN</label>
+                <input type="text" id="int-recipient" placeholder="Enter account or IBAN">
+            </div>
+            <div class="form-group">
+                <label>Amount (£)</label>
+                <input type="number" id="int-amount" placeholder="Enter amount">
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text" id="int-description" placeholder="Enter description">
+            </div>
+            <p style="color: #666; margin-bottom: 15px;">Fee: 5% of transfer amount</p>
+            <button class="btn btn-success" id="int-transfer-submit">Transfer</button>
+        </div>
+    </div>
+
+    <!-- Cash Deposit Modal -->
+    <div id="cash-deposit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>💵 Cash Deposit</h2>
+            <div class="form-group">
+                <label>Amount (£)</label>
+                <input type="number" id="cash-amount" placeholder="Enter amount">
+            </div>
+            <p style="color: #666; margin-bottom: 15px;">Visit any branch to deposit cash</p>
+            <button class="btn btn-success" id="cash-deposit-submit">Deposit</button>
+        </div>
+    </div>
+
+    <!-- Card Deposit Modal -->
+    <div id="card-deposit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>💳 Card Deposit</h2>
+            <div class="form-group">
+                <label>Card Number</label>
+                <input type="text" placeholder="Enter card number">
+            </div>
+            <div class="form-group">
+                <label>Expiry Date</label>
+                <input type="text" placeholder="MM/YY">
+            </div>
+            <div class="form-group">
+                <label>CVV</label>
+                <input type="text" placeholder="CVV">
+            </div>
+            <div class="form-group">
+                <label>Amount (£)</label>
+                <input type="number" id="card-deposit-amount" placeholder="Enter amount">
+            </div>
+            <button class="btn btn-success" id="card-deposit-submit">Deposit</button>
+        </div>
+    </div>
+
+    <!-- Gift Card Modal -->
+    <div id="gift-card-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>🎁 Gift Card Deposit</h2>
+            <div class="form-group">
+                <label>Gift Card Code</label>
+                <input type="text" placeholder="Enter gift card code">
+            </div>
+            <div class="form-group">
+                <label>Amount (£)</label>
+                <input type="number" id="gift-card-amount" placeholder="Enter amount">
+            </div>
+            <button class="btn btn-success">Redeem</button>
+        </div>
+    </div>
+
+    <!-- Bill Payment Modal -->
+    <div id="bill-payment-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>📄 Pay Bills</h2>
+            <div class="form-group">
+                <label>Biller Name</label>
+                <input type="text" id="bill-biller" placeholder="e.g., Electric Company">
+            </div>
+            <div class="form-group">
+                <label>Account Reference</label>
+                <input type="text" id="bill-reference" placeholder="Enter reference number">
+            </div>
+            <div class="form-group">
+                <label>Amount (£)</label>
+                <input type="number" id="bill-amount" placeholder="Enter amount">
+            </div>
+            <button class="btn btn-success" id="bill-pay-submit">Pay Bill</button>
+        </div>
+    </div>
+
+    <!-- Edit Card Modal -->
+    <div id="edit-card-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>✏️ Edit Card</h2>
+            <div class="form-group">
+                <label>Card Number</label>
+                <input type="text" id="edit-card-number" placeholder="Enter card number">
+            </div>
+            <div class="form-group">
+                <label>Card Type</label>
+                <select id="edit-card-type" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px;">
+                    <option value="debit">Debit Card</option>
+                    <option value="credit">Credit Card</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Status</label>
+                <select id="edit-card-status" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px;">
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                    <option value="blocked">Blocked</option>
+                    <option value="expired">Expired</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Expiry Date</label>
+                <input type="text" id="edit-card-expiry" placeholder="MM/YY">
+            </div>
+            <button class="btn btn-success" id="save-card-edit">Save Changes</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

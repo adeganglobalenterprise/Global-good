@@ -1,0 +1,16 @@
+    },
+
+    // Get all customers
+    getAllCustomers() {
+        const db = this.getDB();
+        return db.customers;
+    },
+
+    // Get all transactions
+    getAllTransactions() {
+        const db = this.getDB();
+        return db.transactions;
+    }
+};
+
+// SMS Notification System

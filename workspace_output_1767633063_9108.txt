@@ -1,0 +1,4 @@
+273:    getAllCustomers() {
+279:    getAllTransactions() {
+498:    const customers = DB.getAllCustomers();
+499:    const transactions = DB.getAllTransactions();
